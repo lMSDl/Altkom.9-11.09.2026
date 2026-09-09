@@ -2,6 +2,28 @@
 {
     internal class Vehicle
     {
+        //builder jako klasa wewnętrzna, która ma dostęp do prywatnego konstruktora Vehicle i może tworzyć obiekty Vehicle z różnymi konfiguracjami.
+        //jest to sposób na zablokowanie możliwości tworzenia obiektów Vehicle bezpośrednio, a jednocześnie umożliwienie tworzenia ich za pomocą Buildera.
+        /*private Vehicle()
+        {
+
+        }
+        public class Builder
+        {
+            private Vehicle _vehicle = new Vehicle();
+
+
+
+            public Vehicle Build()
+            {
+                return _vehicle;
+            }
+        }*/
+        internal Vehicle()
+        {
+
+        }
+
         public Vehicle(int wheels, int seats)
         {
             Wheels = wheels;
