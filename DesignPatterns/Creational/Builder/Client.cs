@@ -17,6 +17,15 @@
             vehicle = builder.Build();
             Console.WriteLine(vehicle);
 
+            vehicle = new VehicleBuilder()
+                .SetWheels(4)
+                .SetSeats(5)
+                .SetDoors(4)
+                .SetTrunkCapacity(500)
+                .SetEnginePower(100)
+                .Build();
+            Console.WriteLine(vehicle);
+
             //alternatywnie bez buildera - initializer obiektów
             vehicle = new Vehicle { Doors = 2, Seats = 2, Wheels = 4, EnginePower = 150, TrunkCapacity = 200 };
             Console.WriteLine(vehicle);
