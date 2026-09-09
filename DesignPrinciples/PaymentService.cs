@@ -4,19 +4,9 @@
     {
         private ICollection<Customer> Customers { get; } = new List<Customer> { new Customer(1), new Customer(2), new Customer(3), new Customer(4), new Customer(5) };
 
-        public bool DeleteCustomer(Customer customer)
-        {
-            return Customers.Remove(customer);
-        }
-
         private Customer FindById(int customerId)
         {
             return Customers.Where(x => x.IsActive).SingleOrDefault(x => x.Id == customerId);
-        }
-
-        public Customer FindByAllowedDebit(float allowedDebit)
-        {
-            return Customers.Where(x => x.IsActive).SingleOrDefault(x => x.AllowedDebit == allowedDebit);
         }
 
         public bool Charge(int customerId, float amount)
