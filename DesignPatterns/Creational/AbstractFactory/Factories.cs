@@ -1,0 +1,47 @@
+﻿namespace DesignPatterns.Creational.AbstractFactory
+{
+    internal class HondaFactory : ISedanFactory, ISuvFactory
+    {
+        public ISedan CreateSedan(string segment)
+        {
+            return segment switch
+            {
+                "Compact" => new HondaCompactSedan(),
+                "Full" => new HondaFullSedan(),
+                _ => throw new ArgumentException("Invalid segment", nameof(segment)),
+            };
+        }
+
+        public ISuv CreateSuv(string segment)
+        {
+            return segment switch
+            {
+                "Compact" => new HondaCompactSuv(),
+                "Full" => new HondaFullSuv(),
+                _ => throw new ArgumentException("Invalid segment", nameof(segment)),
+            };
+        }
+    }
+
+    internal class ToyotaFactory : ISedanFactory, ISuvFactory
+    {
+        public ISedan CreateSedan(string segment)
+        {
+            return segment switch
+            {
+                "Compact" => new ToyotaCompactSedan(),
+                "Full" => new ToyotaFullSedan(),
+                _ => throw new ArgumentException("Invalid segment", nameof(segment)),
+            };
+        }
+        public ISuv CreateSuv(string segment)
+        {
+            return segment switch
+            {
+                "Compact" => new ToyotaCompactSuv(),
+                "Full" => new ToyotaFullSuv(),
+                _ => throw new ArgumentException("Invalid segment", nameof(segment)),
+            };
+        }
+    }
+}
