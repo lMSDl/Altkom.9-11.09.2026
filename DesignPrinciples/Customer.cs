@@ -5,6 +5,7 @@
         public Customer(int id)
         {
             Id = id;
+            IsActive = true;
         }
 
         public int Id { get; }
@@ -12,6 +13,7 @@
         public float Income { get; set; }
         public float Outcome { get; set; }
         public float AllowedDebit { get; set; }
+        public bool IsActive { get; set; }
 
         public bool IsDebit => Income - Outcome < 0;
     }

@@ -9,18 +9,23 @@
             return Customers.Remove(customer);
         }
 
+        private Customer FindById(int customerId)
+        {
+            return Customers.Where(x => x.IsActive).SingleOrDefault(x => x.Id == customerId);
+        }
+
         public Customer FindByAllowedDebit(float allowedDebit)
         {
-            return Customers.SingleOrDefault(x => x.AllowedDebit == allowedDebit);
+            return Customers.Where(x => x.IsActive).SingleOrDefault(x => x.AllowedDebit == allowedDebit);
         }
 
         public bool Charge(int customerId, float amount)
         {
-            var customer = Customers.SingleOrDefault(x => x.Id == customerId);
+            var customer = FindById(customerId);
             if (customer == null)
                 return false;
 
-            if (customer.Income - customer.Outcome + customer.AllowedDebit < amount)
+            if (GetBalance(customerId) + customer.AllowedDebit < amount)
                 return false;
 
             customer.Outcome += amount;
@@ -29,7 +34,7 @@
 
         public void AddIncome(int customerId, float amount)
         {
-            var customer = Customers.Where(x => x.Id == customerId).SingleOrDefault();
+            var customer = FindById(customerId);
             if (customer == null)
                 return;
             customer.Income += amount;
@@ -37,7 +42,7 @@
 
         public float? GetBalance(int customerId)
         {
-            var customer = Customers.Where(x => x.Id == customerId).SingleOrDefault();
+            var customer = FindById(customerId);
             return customer?.Income - customer?.Outcome;
         }
     }
