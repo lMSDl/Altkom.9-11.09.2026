@@ -2,24 +2,14 @@
 {
     public class PaymentService
     {
-        private ICollection<Customer> Customers { get; } = new List<Customer> { new Customer(1), new Customer(2), new Customer(3), new Customer(4), new Customer(5) };
-
-        public Customer FindById(int customerId)
+        public bool Charge(Customer? customer, float amount)
         {
-            return Customers.Where(x => x.IsActive).SingleOrDefault(x => x.Id == customerId);
+            return customer?.Account.Charge(amount) ?? false;
         }
 
-        public bool Charge(int customerId, float amount)
+        public void AddIncome(Customer? customer, float amount)
         {
-            var customer = FindById(customerId);
-            if (customer == null)
-                return false;
-            return customer.Charge(amount);
-        }
-
-        public void AddIncome(int customerId, float amount)
-        {
-            FindById(customerId)?.AddIncome(amount);
+            customer?.Account.AddIncome(amount);
         }
     }
 }
