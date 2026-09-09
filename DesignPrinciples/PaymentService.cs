@@ -2,14 +2,14 @@
 {
     public class PaymentService
     {
-        public bool Charge(Customer? customer, float amount)
+        public bool Charge(PaymentAccount? account, float amount)
         {
-            return customer?.Account.Charge(amount) ?? false;
+            return account?.Charge(amount) ?? false;
         }
 
-        public void AddIncome(Customer? customer, float amount)
+        public void AddIncome(PaymentAccount? account, float amount)
         {
-            customer?.Account.AddIncome(amount);
+            account?.AddIncome(amount);
         }
     }
 }

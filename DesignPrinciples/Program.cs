@@ -7,13 +7,15 @@ var custmerId = 1;
 
 var customersService = new CustomersService();
 var customer = customersService.FindById(custmerId);
+var account = customer?.Account;
 var paymentService = new PaymentService();
-paymentService.AddIncome(customer, 500);
-if (paymentService.Charge(customer, 100))
+
+paymentService.AddIncome(account, 500);
+if (paymentService.Charge(account, 100))
 {
-    Console.WriteLine($"Customer {custmerId} charged. Actual balace: {customer.Account.GetBalance()}");
+    Console.WriteLine($"Customer {custmerId} charged. Actual balace: {account.GetBalance()}");
 }
 else
 {
-    Console.WriteLine($"Customer {custmerId} cannot be charged. Actual balace: {customer.Account.GetBalance()}");
+    Console.WriteLine($"Customer {custmerId} cannot be charged. Actual balace: {account.GetBalance()}");
 }
