@@ -1,6 +1,6 @@
 ﻿namespace DesignPatterns.Creational.Builder
 {
-    internal class Vehicle
+    internal class Vehicle : ICloneable
     {
         //builder jako klasa wewnętrzna, która ma dostęp do prywatnego konstruktora Vehicle i może tworzyć obiekty Vehicle z różnymi konfiguracjami.
         //jest to sposób na zablokowanie możliwości tworzenia obiektów Vehicle bezpośrednio, a jednocześnie umożliwienie tworzenia ich za pomocą Buildera.
@@ -57,6 +57,11 @@
         public override string ToString()
         {
             return $"Wheels: {Wheels}, Seats: {Seats}, Doors: {Doors}, TrunkCapacity: {TrunkCapacity}, EnginePower: {EnginePower}";
+        }
+
+        public object Clone()
+        {
+            return MemberwiseClone();
         }
     }
 }

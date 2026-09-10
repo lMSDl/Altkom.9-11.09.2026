@@ -17,6 +17,10 @@
             vehicle = builder.Build();
             Console.WriteLine(vehicle);
 
+            builder.SetWheels(6);
+            Console.WriteLine(builder.Build());
+            Console.WriteLine(vehicle);
+
             vehicle = new VehicleBuilder()
                 .SetWheels(4)
                 .SetSeats(5)
