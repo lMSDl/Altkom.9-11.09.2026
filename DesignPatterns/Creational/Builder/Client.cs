@@ -24,9 +24,16 @@
             vehicle = new VehicleBuilder()
                 .SetWheels(4)
                 .SetSeats(5)
-                .SetDoors(4)
-                .SetTrunkCapacity(500)
-                .SetEnginePower(100)
+                .Production
+                    .SetYear(2024)
+                    .SetColor("Red")
+                .Technical
+                    .SetDoors(4)
+                    .SetTrunkCapacity(500)
+                    .SetEnginePower(100)
+                .Production
+                    .SetManufacturer("Toyota")
+                    .SetModel("Camry")
                 .Build();
             Console.WriteLine(vehicle);
 
