@@ -5,7 +5,7 @@
         public static void Execute()
         {
 
-            var counter = 0;
+            /*var counter = 0;
             while (true)
             {
 
@@ -23,6 +23,39 @@
                 {
                     item.IsVisible = false;
                     Interlocked.Decrement(ref counter);
+                });
+            }*/
+
+            /*var itemPool = new ItemPool(1000);
+            while (true)
+            {
+                var item = itemPool.Acquire();
+                if (item is null)
+                {
+                    Thread.Sleep(100);
+                    continue;
+                }
+                Task.Delay(100).ContinueWith(t =>
+                {
+                    item.IsVisible = false;
+                });
+            }*/
+
+            var objectPool = new ObjectPool<Item>(() => new Item(), 1000);
+            while (true)
+            {
+                var item = objectPool.Acquire();
+                if (item is null)
+                {
+                    Thread.Sleep(100);
+                    continue;
+                }
+
+                item.IsVisible = true;
+                Task.Delay(100).ContinueWith(t =>
+                {
+                    item.IsVisible = false;
+                    objectPool.Release(item);
                 });
             }
 
