@@ -8,7 +8,7 @@ namespace DesignPatterns.Behavioral.NullObject
     {
         public static void Execute()
         {
-            var objects = new AbstractObject[] { new RealObject(), null };
+            var objects = new AbstractObject[] { new RealObject(), new NullObject() };
 
             while (true)
             {
@@ -20,7 +20,6 @@ namespace DesignPatterns.Behavioral.NullObject
                 item.Method1();
                 item.Method2();
                 item.Method3();
-
             }
         }
     }
