@@ -1,20 +1,26 @@
 ﻿namespace DesignPatterns.Behavioral.TemplateMethod
 {
-    internal class EmailLogger
+    internal class EmailLogger : Logger<Email, IDisposable>
     {
-        public void Log(string message)
+        protected override void WriteLogMessage(IDisposable service, Email? item)
         {
-            var messageToLog = SerializeMessage(message);
-            SendLogToEmail(messageToLog);
+            Console.WriteLine("Sending Email with Log Message : " + item.Content);
         }
-        private Email SerializeMessage(string message)
+
+        protected override Email CreateItem(string preparedMessage)
         {
             Console.WriteLine("Serializing message");
-            return new Email { Content = message };
+            return new Email { Content = preparedMessage };
         }
-        private void SendLogToEmail(Email email)
+
+        protected override IDisposable? GetService()
         {
-            Console.WriteLine("Sending Email with Log Message : " + email.Content);
+            return null;
         }
+        //implementacja kroków metody szablonowej często prowadzi do łamania zasady liskov, ponieważ niektóre klasy pochodne mogą nie potrzebować wszystkich kroków metody szablonowej.
+        /*protected override void CloseService(IDisposable? service)
+        {
+            
+        }*/
     }
 }

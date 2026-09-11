@@ -1,35 +1,27 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace DesignPatterns.Behavioral.TemplateMethod
+﻿namespace DesignPatterns.Behavioral.TemplateMethod
 {
-    internal class DatabaseLogger
+    internal class DatabaseLogger : Logger<DbLog, DatabaseService>
     {
-        public void Log(string message)
+        protected override void WriteLogMessage(DatabaseService service, DbLog? item)
         {
-            var messageToLog = SerializeMessage(message);
-            var service = ConnectToDatabase();
-            InsertLogMessageToTable(service, messageToLog);
-            CloseDbConnection(service);
+            service.Insert(item);
         }
-        private DbLog SerializeMessage(string message)
+
+        protected override string PrepareMessage(object message)
+        {
+            return message.ToString();
+        }
+
+        protected override DbLog CreateItem(string preparedMessage)
         {
             Console.WriteLine("Serializing message");
-            return new DbLog { DateTime = DateTime.Now, Message = message };
+            return new DbLog { DateTime = DateTime.Now, Message = preparedMessage };
         }
-        private DatabaseService ConnectToDatabase()
+
+        protected override DatabaseService GetService()
         {
             Console.WriteLine("Connecting to Database.");
             return new DatabaseService();
-        }
-        private void InsertLogMessageToTable(DatabaseService service, DbLog message)
-        {
-            service.Insert(message);
-        }
-        private void CloseDbConnection(DatabaseService service)
-        {
-            service.Dispose();
         }
     }
 }
