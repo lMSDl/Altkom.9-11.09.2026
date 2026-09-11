@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace DesignPatterns.Behavioral.Visitor.I
+﻿namespace DesignPatterns.Behavioral.Visitor.I
 {
     internal class Client
     {
@@ -15,10 +11,10 @@ namespace DesignPatterns.Behavioral.Visitor.I
                 new PlainText() { Text = "\n" },
                 new HyperLink() { Text = "Hyperlink", Url = @"https:\\some.url.pl" }};
 
-
+            var visitor = new HtmlVisitor();
             foreach (var item in collection)
             {
-                Console.Write(item.ToHtml());
+                Console.Write(item.Accept(visitor));
             }
         }
     }

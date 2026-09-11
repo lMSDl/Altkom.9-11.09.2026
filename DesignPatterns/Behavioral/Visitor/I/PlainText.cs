@@ -3,9 +3,10 @@
     internal class PlainText : IElement
     {
         public string Text { get; set; }
-        public virtual string ToHtml()
+
+        public virtual string Accept(IVisitor visitor)
         {
-            return Text;
+            return visitor.Visit(this);
         }
     }
 }
